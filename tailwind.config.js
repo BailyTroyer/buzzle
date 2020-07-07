@@ -13,14 +13,18 @@ module.exports = {
       ...theme('colors'),
       blueberry: '#435DED',
       moula: '#60CBBA',
-      'moula-back': '#EAF3F3',
       milk: '#f1f1f1',
       greyish: '#f4f4f4',
       dark: '#20242a',
+      eggshell: '#F6F9FA',
+      pinkie: '#F04873',
     }),
     textColor: (theme) => ({
       ...theme('colors'),
       'light-blueberry': '#8297F8',
+    }),
+    borderColor: (theme) => ({
+      lightGrey: '#E4E4E4',
     }),
   },
 };
