@@ -29,7 +29,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col bg-white h-screen align-center items-center px-8 justify-between">
+    <div className="flex flex-col bg-white h-screen align-center items-center px-8 justify-between w-1/6">
       <div className="flex flex-col flex-1">
         <Searchbar />
         <SidebarList people={people} />
