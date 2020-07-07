@@ -6,7 +6,7 @@ import ListenerButton from '../ListenerButton'
 const StationCard = ({ image, user, title, listeners }) => {
 
   return (
-    <div className="flex flex-row w-full my-2 bg-white rounded-semiBig justify-between h-24 align-center items-center">
+    <div className="flex flex-row w-full my-2 bg-white rounded-semiBig justify-between h-24 align-center items-center cursor-pointer">
       <div className="flex flex-row align-center">
         <div className="flex flex-row">
           <img src={image} alt="profile" className="rounded-l-lg w-24 h-24" />
@@ -33,10 +33,10 @@ const StationCard = ({ image, user, title, listeners }) => {
 
           <p className="font-semibold w-48 ml-2 text-sm">Joe and 3 matest are listening</p>
         </div>
-        <div className="flex items-center justify-center bg-aqua text-white w-20 h-8 rounded-lg ml-4">
+        <div className="flex items-center justify-center bg-aqua text-white w-20 h-8 rounded-lg ml-4 transition duration-500 ease-in-out transform hover:scale-95 cursor-pointer">
           <p className="font-bold text-md">LISTEN</p>
         </div>
-        <div className="flex items-center justify-center bg-money text-white w-20 h-8 rounded-lg mx-4">
+        <div className="flex items-center justify-center bg-money text-white w-20 h-8 rounded-lg mx-4 transition duration-500 ease-in-out transform hover:scale-95 cursor-pointer">
           <p className="font-bold text-md">JOIN</p>
         </div>
         <ListenerButton listenerCount={listeners} />
