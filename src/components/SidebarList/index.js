@@ -21,7 +21,7 @@ const SidebarList = (props) => {
                 <img className="rounded-md w-8 h-8" src="https://lh3.googleusercontent.com/a-/AOh14GgsD6WRv9uZhD1LL4eXHPCM0kSJVnCjIrD3ANJa=s96-c" alt="profile" />
                 <p className="ml-2 text-md">{person}</p>
               </div>
-              <p className="ml-6">👋</p>
+              <span className="ml-6" role="img" aria-label="wave">👋</span>
             </div>
           ))}
       </div>
