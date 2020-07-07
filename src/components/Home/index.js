@@ -1,9 +1,14 @@
 import React from 'react'
+import '../../tailwind.generated.scss';
+
+import Sidebar from '../Sidebar'
+import Dashboard from '../Dashboard'
 
 const Home = () => {
   return (
-    <div>
-      <p>Home!</p>
+    <div className="flex flex-row bg-eggshell">
+      <Sidebar />
+      <Dashboard />
     </div>
   )
 }

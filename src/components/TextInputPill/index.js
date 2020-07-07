@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../../tailwind.generated.scss';
 
 const TextInputPill = (props) => {
