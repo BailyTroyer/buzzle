@@ -24,6 +24,8 @@ module.exports = {
       tangerine: '#EBB16D',
       cherry: '#D40851',
       berry: '#6633CF',
+      money: '#40BA74',
+      aqua: '#5BC0CC',
     }),
     textColor: (theme) => ({
       ...theme('colors'),
