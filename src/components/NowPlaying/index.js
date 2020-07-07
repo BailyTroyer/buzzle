@@ -12,7 +12,7 @@ const NowPlaying = () => {
   }
 
   useEffect(() => {
-    setRecording(true)
+    setRecording(false)
     return () => {
       setRecording(false)
     }
@@ -20,8 +20,8 @@ const NowPlaying = () => {
  
 
   return (
-    <div className="flex flex-row rounded-lg bg-darkCard w-3/5 h-48 text-white p-6 justify-between">
-      <div className="w-full">      
+    <div className="flex flex-row rounded-lg bg-darkCard w-4/5 h-48 text-white p-6 justify-between mr-8">
+      <div>      
         <h1 className="font-bold text-2xl">Now Playing</h1>
         <h4 className="font-semibold text-sm">Morning Brew w/ Darin Chambers</h4>
         <audio className="mx-0 my-6" controls />

@@ -4,6 +4,7 @@ module.exports = {
       none: '0',
       sm: '0.125rem',
       default: '0.25rem',
+      semiBig: '15px',
       md: '0.375rem',
       lg: '20px',
       full: '9999px',
@@ -20,6 +21,9 @@ module.exports = {
       pinkie: '#F04873',
       darkCard: '#282932',
       bluee: '#3D8BEA',
+      tangerine: '#EBB16D',
+      cherry: '#D40851',
+      berry: '#6633CF',
     }),
     textColor: (theme) => ({
       ...theme('colors'),
