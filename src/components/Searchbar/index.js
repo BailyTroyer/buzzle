@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../../tailwind.generated.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Searchbar = () => {
 
@@ -18,7 +18,7 @@ const Searchbar = () => {
         value={topic}
         placeholder="New Buzzle"
       />
-      <FontAwesomeIcon icon={faSearch} color="#353535" size="sm" className="mr-4" />
+      <FontAwesomeIcon icon={faPlus} color="#353535" size="sm" className="mr-4" />
     </div>
   )
 }

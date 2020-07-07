@@ -31,10 +31,10 @@ const StationCard = ({ image, user, title, listeners }) => {
             <img src={image} alt="profile" className="rounded-full w-10 h-10" />
           </div>
 
-          <p className="font-semibold w-48 ml-2 text-sm">Joe and 3 matest are listening</p>
-        </div>
-        <div className="flex items-center justify-center bg-aqua text-white w-20 h-8 rounded-lg ml-4 transition duration-500 ease-in-out transform hover:scale-95 cursor-pointer">
-          <p className="font-bold text-md">LISTEN</p>
+          <div className="flex flex-col">
+            <p className="font-semibold w-48 ml-2 text-sm">3 Participating</p>
+            <p className="font-semibold w-48 ml-2 text-sm">6 Listening</p>
+          </div>
         </div>
         <div className="flex items-center justify-center bg-money text-white w-20 h-8 rounded-lg mx-4 transition duration-500 ease-in-out transform hover:scale-95 cursor-pointer">
           <p className="font-bold text-md">JOIN</p>
