@@ -1,10 +1,12 @@
 import React from 'react'
 import '../../tailwind.generated.scss'
 
+import NowPlaying from '../NowPlaying'
+
 const Dashboard = () => {
   return (
-    <div>
-      <p>Dashboard</p>
+    <div className="flex flex-col w-full p-8">
+      <NowPlaying />
     </div>
   )
 }

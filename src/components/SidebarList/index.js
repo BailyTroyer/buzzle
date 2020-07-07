@@ -10,11 +10,11 @@ const SidebarList = (props) => {
       <h3 className="mb-6">People</h3>
       <div className="w-full">
           {people.map(person => (
-            <div className="flex flex-row items-center justify-between my-2">
+            <div key={person} className="flex flex-row items-center justify-between my-2">
               <div className="flex flex-row items-center">
-                <div class="md:flex md:items-center mr-1">
-                  <label class="md:w-2/3 block text-gray-500 font-bold">
-                    <input class="mr-2 leading-tight w-4 h-4 rounded-lg" type="checkbox" />
+                <div className="md:flex md:items-center mr-1">
+                  <label className="md:w-2/3 block text-gray-500 font-bold">
+                    <input className="mr-2 leading-tight w-4 h-4 rounded-lg" type="checkbox" />
                   </label>
                 </div>
 

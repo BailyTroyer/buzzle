@@ -11,7 +11,7 @@ const Searchbar = () => {
   return (
     <div className="border-solid border-lightGrey border rounded-lg mt-8">
       <input
-        className="outline-none mx-4 my-2 w-40 text-sm"
+        className="outline-none mx-4 my-2 w-36 text-sm"
         type="text"
         name="topic"
         onChange={(event) => setTopic(event.target.value)}

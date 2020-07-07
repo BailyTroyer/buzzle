@@ -18,6 +18,8 @@ module.exports = {
       dark: '#20242a',
       eggshell: '#F6F9FA',
       pinkie: '#F04873',
+      darkCard: '#282932',
+      bluee: '#3D8BEA',
     }),
     textColor: (theme) => ({
       ...theme('colors'),
