@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Buzzle",
+  "name": "micro radio stations for work conversations",
   "icons": [
     {
       "src": "favicon.ico",

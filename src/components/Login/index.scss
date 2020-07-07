@@ -1,0 +1,25 @@
+.or-text {
+  display: flex;
+  flex-direction: row;
+  font-family: Montserrat;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 14px;
+  margin-top: 1em;
+
+  color: #91969a;
+}
+
+.or-text:before,
+.or-text:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #f0f0f0;
+  margin: auto;
+}
+.or-text:before {
+  margin-right: 10px;
+}
+.or-text:after {
+  margin-left: 10px;
+}
