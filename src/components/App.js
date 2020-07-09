@@ -5,12 +5,14 @@ import Auth from './Auth'
 
 import Home from './Home'
 import Login from './Login'
+import Live from './Live'
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/login" component={Login} />
+        <Route path = '/l/:id' render = {Live} />
         <Route exact path="/" component={Auth(Home)} />
       </Switch>
     </Router>
