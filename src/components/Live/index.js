@@ -92,6 +92,7 @@ const Live = (routerProps) => {
   //   console.log("GOT HANDSHAKE: ", enteredName)
   // }
   useEffect(() => {
+
     //const username = prompt('Please enter your name')
     const username = Array(8).fill('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789').map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('')
     const room = routerProps.match.params.liveId
