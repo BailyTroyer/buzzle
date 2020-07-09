@@ -1,9 +1,17 @@
+var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
 var cors = require('cors');
 // var io = require('socket.io')(http);
 
 var io = require('socket.io')(http, { origins: '*:*'});
+
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/l/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 const userSessionExample = [
 	{
