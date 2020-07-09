@@ -1,7 +1,7 @@
 import React, { useEffect, useState, createRef, useRef } from "react";
 import ReactDOM from 'react-dom';
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "localhost:4000";
+const ENDPOINT = "https://www.buzzle.live";
 const configuration = {
   iceServers: [
     {

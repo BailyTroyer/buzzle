@@ -11,7 +11,7 @@ export default class ConnectionClient {
   constructor() {
 
     this.connectionClientInstance = axios.create({
-      baseURL: `https://api.buzzle.live`,
+      baseURL: `localhost:4000`,
       timeout: 60000,
     });
   }

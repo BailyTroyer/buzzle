@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import socketIOClient from "socket.io-client";
 
-const ENDPOINT = "https://api.buzzle.live";
+const ENDPOINT = "https://www.buzzle.live";
 
 const configuration = {
   iceServers: [

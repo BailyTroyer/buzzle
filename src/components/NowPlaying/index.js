@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { setNowPlaying } from '../../actions/nowPlaying'
 
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "https://api.buzzle.live";
+const ENDPOINT = "https://www.buzzle.live";
 
 const NowPlaying = () => {
 
