@@ -4,21 +4,24 @@ import '../../tailwind.generated.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const Searchbar = () => {
+import { useDispatch } from 'react-redux';
+import { nowPlaying } from '../../actions/nowPlaying';
 
-  const [topic, setTopic] = useState('')
+const Searchbar = ({ onChange, value, onClick }) => {
+
+  const dispatch = useDispatch();
 
   return (
-    <div className="border-solid border-lightGrey border rounded-lg mt-8">
+    <div className="flex flex-row items-center align-center border-solid border-lightGrey border rounded-lg mt-8">
       <input
-        className="outline-none mx-4 my-2 w-36 text-sm"
+        className="outline-none mx-4 my-2 text-sm"
         type="text"
         name="topic"
-        onChange={(event) => setTopic(event.target.value)}
-        value={topic}
+        onChange={(event) => onChange(event.target.value)}
+        value={value}
         placeholder="New Buzzle"
       />
-      <FontAwesomeIcon icon={faPlus} color="#353535" size="sm" className="mr-4" />
+      <FontAwesomeIcon icon={faPlus} color="#353535" size="sm" className="mr-4" onClick={onClick} />
     </div>
   )
 }

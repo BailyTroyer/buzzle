@@ -9,20 +9,31 @@ const GoogleSSO = () => {
   const dispatch = useDispatch();
 
   const onSuccess = (response) => {
-    const regex = RegExp('(.+)@acvauctions.com');
-    if (regex.test(response.profileObj.email)) {
-      dispatch(
-        authGoogle(
-          response.profileObj.email,
-          response.tokenId,
-          response.profileObj.name,
-          response.profileObj.imageUrl,
-          true
-        )
-      );
+    // const regex = RegExp('(.+)@acvauctions.com');
+    // if (regex.test(response.profileObj.email)) {
+    //   dispatch(
+    //     authGoogle(
+    //       response.profileObj.email,
+    //       response.tokenId,
+    //       response.profileObj.name,
+    //       response.profileObj.imageUrl,
+    //       true
+    //     )
+    //   );
 
-      history.push('/');
-    }
+    //   history.push('/');
+    // }
+    dispatch(
+      authGoogle(
+        response.profileObj.email,
+        response.tokenId,
+        response.profileObj.name,
+        response.profileObj.imageUrl,
+        true
+      )
+    );
+
+    history.push('/');
   };
 
   const onFailure = (response) => {

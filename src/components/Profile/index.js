@@ -6,14 +6,19 @@ import ProfilePrizeCard from '../ProfilePrizeCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faTrophy, faWrench, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
+import { useSelector } from 'react-redux';
+
 const Profile = () => {
+
+  const { auth } = useSelector((state) => state);
+
   return (
     <div className="flex flex-col rounded-lg bg-white w-1/5 h-48 p-6">
       <div className="flex flex-row justify-between items-center w-full h-12">
         <div className="flex flex-row ">
           <img className="rounded-semiBig w-12 h-12" src="https://unsplash.com/photos/ILip77SbmOE/download?force=true&w=640" alt="profile" />
           <div className="flex flex-col ml-4">
-            <p className="font-bold text-lg">Baily Troyer</p>
+            <p className="font-bold text-lg">{auth.name}</p>
             <p className="font-semibold text-sm text-purple-600">Infra</p>
           </div>
         </div>

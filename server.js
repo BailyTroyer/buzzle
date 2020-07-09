@@ -1,6 +1,9 @@
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var cors = require('cors');
+// var io = require('socket.io')(http);
+
+var io = require('socket.io')(http, { origins: '*:*'});
 
 const userSessionExample = [
 	{
@@ -24,18 +27,20 @@ const roomsExample = [
 	}
 ]
 
-const userSession = []
-const rooms = []
+app.use(cors());
 
-app.get('/', function(req, res) {
+var userSession = []
+var rooms = []
+
+app.get('/', cors(), function(req, res) {
   res.send('Hello World!');
 });
 
-app.get('/rooms', function(req, res) {
+app.get('/rooms', cors(), function(req, res) {
   res.send(rooms);
 });
 
-app.get('/session', function(req, res) {
+app.get('/session', cors(), function(req, res) {
   res.send(userSession);
 });
 
@@ -44,8 +49,17 @@ io.on('connection', function(socket) {
 	
 	io.sockets.emit("handshake");
 
+	socket.on("addUser", (data) => {
+		const socketId = userSession.find(user => user.name === data.username).socketId;
+		console.log("ADDING USER WITH SOCKET ID ", socketId)
+		socket.to(socketId).emit("addUser", {
+			room: data.room
+		})
+	})
+
 	socket.on('handshake-response', (data) => {
 		console.log("USER SESH SOME: ", userSession.some(e => e.socketId === socket.id))
+		console.log("ROOM: ", data.room)
 		if (!userSession.some(e => e.socketId === socket.id)) {
 			// if user 1st time add to list
 			userSession.push({
@@ -54,28 +68,36 @@ io.on('connection', function(socket) {
 			})
 		}
 
-		// add to room
-		socket.join(data.room)
+		if (data.room !== undefined) {
+			// add to room
+			socket.join(data.room)
 
-		// add to room store
+			// add to room store
 
-		if (!rooms.some(e => e.room === data.room)) {
-			// room DNE...create it
-			rooms.push({
-				room: data.room,
-				host: socket.id,
-				listeners: [],
-				participants: [socket.id]
-			})
-		} else {
-			// already exists, append to room participants
-			let roomInstance = rooms.find(e => e.room === data.room)
-			if (!roomInstance.participants.includes(socket.id)) {
-				roomInstance.participants.push(socket.id)
+			if (!rooms.some(e => e.room === data.room)) {
+				// room DNE...create it
+				rooms.push({
+					room: data.room,
+					host: socket.id,
+					listeners: [],
+					participants: [socket.id]
+				})
+			} else {
+				// already exists, append to room participants
+				let roomInstance = rooms.find(e => e.room === data.room)
+				if (!roomInstance.participants.includes(socket.id)) {
+					roomInstance.participants.push(socket.id)
+				}
+
+				if (roomInstance.host === 'finding new host') {
+					roomInstance.host = socket.id
+				}
+
+				console.log('emitting joined')
+
+				// emit to other users
+				io.to(data.room).emit("user-joined", socket.id, roomInstance.participants.length, roomInstance.participants);
 			}
-
-			// emit to other users
-			io.to(data.room).emit("user-joined", socket.id, roomInstance.participants.length, roomInstance.participants);
 		}
 	})
 
@@ -89,6 +111,20 @@ io.on('connection', function(socket) {
 
 	socket.on('disconnect', function() {
 		io.sockets.emit("user-left", socket.id);
+		console.log("LOST THIS USER: ", socket.id)
+
+		userSession = userSession.filter(user => user.socketId !== socket.id)
+		rooms = rooms.map(room => {
+			// check if user was in participants || listeners & remove
+			if (room.listeners.some(e => e === socket.id)) { room.listeners = room.listeners.filter(userId => userId !== socket.id) }
+			if (room.participants.some(e => e === socket.id)) { room.participants = room.participants.filter(userId => userId !== socket.id) }
+
+			if (socket.id === room.host) {
+				room.host = 'finding new host'
+			}
+
+			return room
+		})
 	})
 });
 

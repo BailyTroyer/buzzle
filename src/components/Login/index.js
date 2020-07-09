@@ -1,7 +1,7 @@
 import React from 'react'
 import './index.scss'
 import '../../tailwind.generated.scss'
-import { ReactComponent as Buzzle } from './buzzle.svg'
+import { ReactComponent as Buzzle } from '../../assets/buzzle.svg'
 
 import TextInputPill from '../TextInputPill'
 import Google from '../Google'

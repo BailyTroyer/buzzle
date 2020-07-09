@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div className="flex flex-col w-full p-8 h-screen">
       <div className="flex flex-row">
         <NowPlaying />
-        <Profile />
+        
       </div>
       <RadioFeed />
     </div>
