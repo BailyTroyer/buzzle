@@ -26,6 +26,7 @@ module.exports = {
       berry: '#6633CF',
       money: '#40BA74',
       aqua: '#5BC0CC',
+      darkish: '#252939',
     }),
     textColor: (theme) => ({
       ...theme('colors'),

@@ -1,6 +1,10 @@
 import React, { useEffect, useState, createRef, useRef } from "react";
 import ReactDOM from 'react-dom';
 import socketIOClient from "socket.io-client";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMicrophone, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
+
 const ENDPOINT = "https://www.buzzle.live";
 const configuration = {
   iceServers: [
@@ -40,6 +44,10 @@ const Live = (routerProps) => {
   var socketId = useRef();
   var connections = useRef([]);
   var remoteVids = useRef([])
+
+  const [muted, setMuted] = useState(true)
+
+
   var lazy = createRef()
   function gotMessageFromServer(fromId, message) {
     console.log("gotMessageFromServer", fromId);
@@ -157,8 +165,9 @@ const Live = (routerProps) => {
                     video.autoplay = true; 
                     video.muted = true;
                     video.playsinline = true;
-                    video.width = "320"
-                    video.height = "240"
+                    video.width = "480"
+                    video.height = "360"
+                    video.id = socketListId
                     nodeElement.appendChild(video)
                   };
                   //Add the local video stream
@@ -200,21 +209,25 @@ const Live = (routerProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="App">
-      <div style={{ flexDirection: "row" }}>
-        <video
-          key={video}
-          width="320"
-          height="240"
-          ref={video}
-          autoPlay={true}
-          muted={true}
-        />
-        <div id="vids" />
-        {remoteVids.current !== null &&
-          remoteVids.current.map((rv, i) => React.createElement("video", { key: i, ref: rv, autoPlay: true, muted: true }))
-          //remoteVids.current.map((rv, i) => React.createElement("video", { key: i, height: "240", width: "320", ref: rv, autoPlay: true, muted: true }))
-        }
+    <div className="flex flex-col bg-darkish w-screen h-screen justify-between">
+      <div className="flex flex-col">
+        <div className="flex flex-row flex-wrap">
+          <div id="vids" className="flex flex-row flex-wrap">
+            <video
+              key={video}
+              width="480"
+              height="360"
+              ref={video}
+              autoPlay={true}
+              muted={muted}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row my-12 mx-12">
+        <div className={`flex flex-row bg-${muted ? "black" : "white"} justify-center items-center align-center rounded-full w-16 h-16`}>
+          <FontAwesomeIcon icon={muted ? faMicrophoneSlash : faMicrophone} color={muted ? "#FFF" : "000"} size="2x" onClick={() => setMuted(!muted)} />
+        </div>
       </div>
     </div>
   );
