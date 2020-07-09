@@ -1,27 +1,18 @@
+
+var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
+var path    = require('path')
 var cors = require('cors');
 var io = require('socket.io')(http);
-const userSessionExample = [
-	{
-		name: 'Baily Troyer',
-		socketId: '4324dfdss'
-	}
-]
-const roomsExample = [
-	{
-		room: 'How to k8s',
-		host: 'fdsaf3fda',
-		listeners: [
-			'4324dfdss',
-			'fdsaf3fda',
-		],
-		participants: [
-			'454fgdsas',
-			'aasdf3w1d',
-		]
-	}
-]
+
+// Routing
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/l/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.use(cors());
 var userSession = []
 var rooms = []
