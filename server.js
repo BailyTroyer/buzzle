@@ -1,3 +1,4 @@
+
 var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
@@ -11,7 +12,6 @@ app.use(express.static(path.join(__dirname, 'build')))
 app.get('/l/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
 
 const userSessionExample = [
 	{
@@ -64,7 +64,6 @@ io.on('connection', function(socket) {
 			room: data.room
 		})
 	})
-
 	socket.on('handshake-response', (data) => {
 		console.log("USER SESH SOME: ", userSession.some(e => e.socketId === socket.id))
 		console.log("ROOM: ", data.room)
@@ -130,7 +129,6 @@ io.on('connection', function(socket) {
 			if (socket.id === room.host) {
 				room.host = 'finding new host'
 			}
-
 			return room
 		})
 	})
@@ -139,5 +137,3 @@ io.on('connection', function(socket) {
 http.listen(4000, function() {
    console.log('listening on *:4000');
 });
-
-
