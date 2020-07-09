@@ -12,7 +12,8 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route path = '/l/:id' render = {Live} />
+        <Route path = '/l/:liveId' component = {Live} />
+        <Route exact path = '/live' component = {Live} />
         <Route exact path="/" component={Auth(Home)} />
       </Switch>
     </Router>

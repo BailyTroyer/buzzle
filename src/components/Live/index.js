@@ -1,23 +1,7 @@
-// import React from 'react'
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-// import Auth from './Auth'
-// import Home from './Home'
-// import Login from './Login'
-// const App = () => {
-//   return (
-//     <Router>
-//       <Switch>
-//         <Route exact path="/login" component={Login} />
-//         <Route exact path="/" component={Auth(Home)} />
-//       </Switch>
-//     </Router>
-//   );
-// }
-// export default App
 import React, { useEffect, useState, createRef, useRef } from "react";
 import ReactDOM from 'react-dom';
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "https://d62d50da32cf.ngrok.io";
+const ENDPOINT = "localhost:4000";
 const configuration = {
   iceServers: [
     {
@@ -47,7 +31,7 @@ const configuration = {
     },
   ],
 };
-function Live() {
+const Live = (routerProps) => {
   const { RTCPeerConnection, RTCSessionDescription } = window;
   const [video] = useState(createRef());
   const [video1] = useState(createRef());
@@ -100,8 +84,9 @@ function Live() {
   //   console.log("GOT HANDSHAKE: ", enteredName)
   // }
   useEffect(() => {
-    const username = prompt('Please enter your name')
-    const room = prompt('Please enter your room name')
+    //const username = prompt('Please enter your name')
+    const username = Array(8).fill('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789').map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('')
+    const room = routerProps.match.params.liveId
     navigator.getUserMedia = ( navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
       navigator.mozGetUserMedia ||
@@ -130,6 +115,19 @@ function Live() {
               // var parentDiv = video.parentElement;
               // video.parentElement.parentElement.removeChild(parentDiv);
             });
+            socket.current.on("user-left", function (id) {
+                // HANDLE THIS BEING REMOVED
+                console.log("ID LEFT: ", id)
+                // var video = document.querySelector('[data-socket="'+ id +'"]');
+                var video = document.getElementById(id)
+                console.log("GOT THE VID: ", video)
+                if (video !== null) {
+                  var parentDiv = video.parentElement;
+                  console.log("PARENT DIV: ", parentDiv)
+                  parentDiv.removeChild(video)
+                  // video.parentElement.parentElement.removeChild(parentDiv);
+                }
+            });
             socket.current.on("user-joined", function (id, count, clients) {
               console.log("USER JOINED: ", clients)
               clients.forEach(function (socketListId) {
@@ -157,7 +155,7 @@ function Live() {
                     var video = document.createElement('video');
                     video.srcObject = event.stream;
                     video.autoplay = true; 
-                    video.muted = false;
+                    video.muted = true;
                     video.playsinline = true;
                     video.width = "320"
                     video.height = "240"
@@ -202,7 +200,7 @@ function Live() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="Live">
+    <div className="App">
       <div style={{ flexDirection: "row" }}>
         <video
           key={video}
@@ -214,7 +212,8 @@ function Live() {
         />
         <div id="vids" />
         {remoteVids.current !== null &&
-          remoteVids.current.map((rv, i) => React.createElement("video", { key: i, height: "240", width: "320", ref: rv, autoPlay: true, muted: true }))
+          remoteVids.current.map((rv, i) => React.createElement("video", { key: i, ref: rv, autoPlay: true, muted: true }))
+          //remoteVids.current.map((rv, i) => React.createElement("video", { key: i, height: "240", width: "320", ref: rv, autoPlay: true, muted: true }))
         }
       </div>
     </div>
