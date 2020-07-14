@@ -20,10 +20,12 @@ const StationCard = ({ image, user, title, listeners, participants }) => {
   useEffect(() => {
     const getUserName = async (socketId) => {
       const sessionData = await connectionClient.getSession()
-      console.log('session data: ', sessionData)
+      const roomData = await connectionClient.getRooms()
+      // console.log("ROOM DAT: ", roomData)
+      // console.log('session data: ', sessionData)
       const session = sessionData.find(session => session.socketId === socketId)
       if (session !== undefined) {
-        console.log('session: ', session.name)
+        // console.log('session: ', session.name)
         setUserName(session.name)
       }
     }
@@ -84,6 +86,7 @@ const StationCard = ({ image, user, title, listeners, participants }) => {
             type="submit"
             className="flex items-center justify-center bg-cherry text-white w-20 h-8 rounded-lg mx-4 transition duration-500 ease-in-out transform hover:scale-95 cursor-pointer"
             onClick={() => {
+              
               console.log("LEAVING")
               dispatch(setNowPlaying('Waiting', '...', false, false))
             }}

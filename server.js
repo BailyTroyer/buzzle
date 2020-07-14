@@ -10,6 +10,21 @@ var io = require('socket.io')(http, { origins: '*:*'});
 
 app.use(express.static(path.join(__dirname, 'build')))
 
+
+
+app.get('/new', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.get('/login', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.get('/get', cors(), function(req, res) {
+  const room = Array(16).fill('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~').map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('');
+  res.send('https://buzzle.live/l/'+room);
+});
+
 app.get('/l/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

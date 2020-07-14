@@ -32,7 +32,7 @@
     "build:tailwind": "tailwindcss build src/tailwind.scss -o src/tailwind.generated.scss",
     "prestart": "npm run build:tailwind",
     "prebuild": "npm run build:tailwind",
-    "start": "react-scripts start",
+    "start": "PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

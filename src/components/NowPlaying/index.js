@@ -7,8 +7,11 @@ import { IceConfiguration } from '../../utils'
 
 import { useDispatch } from 'react-redux'
 import { setNowPlaying } from '../../actions/nowPlaying'
+import { setRooms } from '../../actions/rooms'
 
 import socketIOClient from "socket.io-client";
+
+import ConnectionClient from '../../services/ConnectionClient'
 const ENDPOINT = "https://www.buzzle.live";
 
 const NowPlaying = () => {
@@ -27,12 +30,21 @@ const NowPlaying = () => {
 
   var localStream = useState(createRef());
 
+  const connectionClient = new ConnectionClient()
+
   var socketId = useRef();
   var connections = useRef([]);
   var remoteVids = useRef([])
   var lazy = createRef()
 
   useEffect(() => {
+
+
+    const getRooms = async () => {
+      const roomData = await connectionClient.getRooms()
+      dispatch(setRooms(roomData))
+      console.log("ROOM DAT HERE: ", roomData)
+    }
 
     setRecording(nowPlaying.active)
 
@@ -160,6 +172,9 @@ const NowPlaying = () => {
                   //Add the local video stream
                   console.log("YOYO: ", connections.current[socketListId]);
                   console.log("STREE, ", localStream.current);
+
+                  getRooms();
+
                   connections.current[socketListId].addStream(
                     localStream.current
                   );
@@ -195,6 +210,11 @@ const NowPlaying = () => {
       );
   
     } else {
+      console.log("NOT ACTIVE, GETTING ROOMS: ", socket.current)
+      if (socket.current) {
+        socket.current.disconnect()
+      }
+      getRooms();
       var parent = document.getElementById("vids")
       if (parent.children.length > 1) {
         for (const child of parent.children) {
@@ -202,7 +222,6 @@ const NowPlaying = () => {
             parent.removeChild(child)
           }
         }
-        
       }
     }
 

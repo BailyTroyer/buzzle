@@ -5,16 +5,15 @@ import { useSelector } from 'react-redux';
 
 export default function (Component) {
   const Authentication = ({ ...props }) => {
-    return <Component {...props} />;
-    // const { auth } = useSelector((state) => state);
+    const { auth } = useSelector((state) => state);
 
-    // console.log("AUTH: ", auth)
+    console.log("AUTH: ", auth)
 
-    // if (auth.authGoogle !== null && auth.authGoogle) {
-    //   return <Component {...props} />;
-    // }
+    if (auth.authGoogle !== null && auth.authGoogle) {
+      return <Component {...props} />;
+    }
 
-    // return <Redirect to="/login" />;
+    return <Redirect to="/login" />;
   };
 
   return Authentication;

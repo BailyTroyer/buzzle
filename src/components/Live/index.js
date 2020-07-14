@@ -164,7 +164,7 @@ const Live = (routerProps) => {
                     var video = document.createElement('video');
                     video.srcObject = event.stream;
                     video.autoplay = true; 
-                    video.muted = true;
+                    video.muted = false;
                     video.playsinline = true;
                     video.width = "480"
                     video.height = "360"
@@ -220,7 +220,7 @@ const Live = (routerProps) => {
               height="360"
               ref={video}
               autoPlay={true}
-              muted={muted}
+              muted={true}
             />
           </div>
         </div>
